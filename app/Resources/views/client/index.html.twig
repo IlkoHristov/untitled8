@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Clients list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Client</th>
+                <th>Matter</th>
+                <th>Issuer</th>
+                <th>Language</th>
+                <th>Currency</th>
+                <th>Invoice</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Discount</th>
+                <th>Vat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td><a href="{{ path('client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
+                <td>{{ client.client }}</td>
+                <td>{{ client.matter }}</td>
+                <td>{{ client.issuer }}</td>
+                <td>{{ client.language }}</td>
+                <td>{{ client.currency }}</td>
+                <td>{{ client.invoice }}</td>
+                <td>{% if client.date %}{{ client.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ client.amount }}</td>
+                <td>{{ client.discount }}</td>
+                <td>{{ client.vat }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('client_show', { 'id': client.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('client_new') }}">Create a new client</a>
+        </li>
+    </ul>
+{% endblock %}
